@@ -1,0 +1,4 @@
+{
+  "functions": { "api/*.js": { "maxDuration": 300 } },
+  "crons": [{ "path": "/api/tick?sumber=vercel-cron", "schedule": "17 0 * * *" }]
+}

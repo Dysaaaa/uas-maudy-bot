@@ -1,0 +1,12 @@
+PERBANDINGAN TIMEFRAME — aturan Dysa yang sama (lib/strategy.js), mesin backtest yang sama (tools/backtest.mjs), 8 pasangan, fee resmi + spread/slippage terukur
+Modal Rp100 jt, 10% per posisi, maks 10 slot, daily loss 5%. Dijalankan 4 Nov 2026 pagi dengan mengganti PARAMS (tf, N, M, T, gateMA, warmup, window) dan folder candle saja.
+Keputusan memilih 4 jam setara hari diambil SETELAH melihat tabel ini (in-sample).
+
+timeframe                             CAGR 2023-11   MDD      PF    trade  WR     porsi biaya  CAGR 2022-11
+1 jam, 55/20/100 bar                  17,00%        -11,17%  2,12   253   36,8%   32,1%         9,38%
+4 jam, 55/20/100 bar                  13,80%        -22,05%  1,62   207   37,7%   32,2%        12,58%
+4 jam, 330/120/600 bar (setara hari)  25,27%        -23,42%  2,28    85   32,9%   11,0%        18,28%   <- dipakai bot
+harian, 55/20/100 hari                25,57%        -28,91%  2,13    77   35,1%   10,8%        16,81%
+
+Angka final saat freeze (median spread dari snapshot s/d 2026-11-04 02:40 UTC), 4 jam setara hari: CAGR 25,17%, MDD -23,44%, PF 2,27, 85 trade, porsi biaya 11,2%; mulai 2022-11: CAGR 18,21%, PF 2,09, 113 trade (data/backtest_*.txt).
+Beli & tahan BTC/IDR 2023-11 → 2026-11: +155,9%, MDD -49,4%.

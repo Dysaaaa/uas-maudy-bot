@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.vercel/
+data/snapshots/_loop.log
+
+.vercel
+.env*
+!.env.example

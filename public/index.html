@@ -1,0 +1,12 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dysa Trading System</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"><style id="css"></style></head>
+<body><header><div class="hwrap"><div class="brand"><div class="logo"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="9" cy="10" r="6" fill="#9A7158"/><circle cx="31" cy="10" r="6" fill="#9A7158"/><circle cx="9" cy="10" r="3" fill="#F4B9C6"/><circle cx="31" cy="10" r="3" fill="#F4B9C6"/><circle cx="20" cy="22" r="14" fill="#9A7158"/><ellipse cx="20" cy="27" rx="7" ry="5.5" fill="#F6E6D3"/><circle cx="15" cy="20" r="1.8" fill="#4A2C1D"/><circle cx="25" cy="20" r="1.8" fill="#4A2C1D"/><ellipse cx="20" cy="25" rx="2.2" ry="1.6" fill="#4A2C1D"/><circle cx="11" cy="25" r="2.2" fill="#F4B9C6" opacity=".8"/><circle cx="29" cy="25" r="2.2" fill="#F4B9C6" opacity=".8"/><path d="M17.5 28.5q2.5 2 5 0" stroke="#4A2C1D" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M15 6.5l5 2.5 5-2.5v5l-5-2.5-5 2.5z" fill="#E58DA2"/><circle cx="20" cy="9" r="1.6" fill="#D9738C"/></svg></div><div><h1>Dysa <span>♡</span> Trading System</h1><small>Bot dry run Indodax · Breakout Hybrid 4 jam · Maudy Anisa Putri · 25110200026</small></div></div></div></header><main><p class="m">Dashboard langsung dari log bot (<a href="/api/state">/api/state</a>). Angka gap backtest vs forward muncul setelah hitung_ulang dijalankan di akhir forward test.</p><div id="o">memuat…</div></main>
+<script type="module">
+import { forwardFromLogs, botStatus, latihanFromLogs } from './metrics.js';
+import { renderDashboard, CSS } from './render.js';
+document.getElementById('css').textContent = CSS;
+try {
+  const [st, bt] = await Promise.all([fetch('/api/state?snap=BTCIDR').then(r => r.json()), fetch('/backtest_ringkasan.json').then(r => r.json())]);
+  const gap = await fetch('/hasil_hitung_ulang.json').then(r => r.ok ? r.json() : null).catch(() => null);
+  renderDashboard(document.getElementById('o'), { bt, fw: forwardFromLogs(st), gap: gap?.gap ?? null, sumber: location.origin + '/api/state', status: botStatus(st), latihan: latihanFromLogs(st) });
+} catch (e) { document.getElementById('o').textContent = 'Gagal memuat: ' + e; }
+</script></body></html>
