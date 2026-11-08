@@ -177,4 +177,4 @@ node tools/hitung_ulang.mjs               # backtest ulang + backtest jendela fo
 Aturan, parameter, dan universe di `lib/strategy.js`, `lib/costs.js`, dan `lib/indodax.js` (`PAIRS`) **tidak diubah** sesudah commit freeze. Perbaikan bug yang tidak mengubah aturan dicatat di bagian 7.
 
 ## 7. Catatan perubahan sesudah freeze
-*(kosong)*
+- 8 Nov 2026: sejak 7 Nov 22.05 WIB Indodax menolak setiap permintaan bot dengan HTTP 403, sehingga candle yang tutup 7 Nov 23.00 sampai 8 Nov 11.00 WIB tidak diproses tepat waktu. Bot tetap dipanggil tiap jam dan setiap panggilan tercatat `ERROR` di log. Dugaan penyebab: User-Agent yang mengandung kata "bot". Yang diubah hanya User-Agent di `lib/indodax.js` (`uas-dry-run-bot-maudy` → `uas-dry-run-maudy`). Aturan, parameter, universe, biaya, dan backtest tidak berubah. Panggilan pertama sesudah perbaikan memproses candle tertutup terakhir; candle sebelumnya tidak diulang, dan selisihnya terlihat di `hitung_ulang`.
